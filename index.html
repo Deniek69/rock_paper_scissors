@@ -8,7 +8,9 @@
 </head>
 <body>
     <script>
-        
+        var humanScore = 0;
+        var computerScore = 0;
+
         function getHumanChoice() {
         return prompt("Rock, paper, scissors?").trim().toLowerCase();
         }
@@ -31,23 +33,37 @@
                 (human === "rock" && computer === "scissors") || 
                 (human === "scissors" && computer === "paper") || 
                 (human === "paper" && computer === "rock") 
-            ) {
-                return "You win!";
+            ) { 
+                humanScore += 1;
+                
             } else {
-                return "You lose!";
+                computerScore += 1;
+                
+            }
+        }   
+
+        function playGame() {
+            
+            for (i = 0; i < 5; i++) {
+                var humanChoice = getHumanChoice();
+                var computerChoice = getComputerChoice().trim().toLowerCase();
+                console.log(playRound(humanChoice, computerChoice))
+                console.log("It's " + humanScore + " : " + computerScore)
             }
         }
 
-        function game() {
-            const humanChoice = getHumanChoice();
-            const computerChoice = getComputerChoice().trim().toLowerCase();
-        
-            console.log("You chose: ", humanChoice)
-            console.log("Computer chose: ", computerChoice)
-            console.log(playRound(humanChoice, computerChoice))
+        function result() {
+            if (humanScore === computerScore) {
+                return "After 5 rounds it's a tie!";
+            } else if (humanScore > computerScore) {
+                return "Congratulations! You win! " + humanScore + " : " + computerScore;
+            } else {
+                return "You lose " + humanScore + ":" + computerScore + ", maybe next time";
+            }
         }
-
-        console.log(game())
+        
+        console.log(playGame())
+        console.log(result())
 
     </script>
     
